@@ -1,19 +1,19 @@
 import React from 'react'
-import './WeatherIcon.css'
+import './Icon.css'
 import 'open-weather-icons/dist/css/open-weather-icons.css'
 import 'open-weather-icons/dist/fonts/OpenWeatherIcons.woff'
 import 'open-weather-icons/dist/fonts/OpenWeatherIcons.woff2'
 
-const WeatherIcon = ({WeatherIconData}) => {
+const Icon = ({iconData}) => {
 
 	return(
-		<div className="weather-icon" >
+		<div className="icon" >
 
-			<i className={`owi owi-${WeatherIconData}`}></i>
+			<i className={`owi owi-${iconData}`}></i>
 
 		</div>
 	)
 
 }
 
-export default WeatherIcon
+export default Icon

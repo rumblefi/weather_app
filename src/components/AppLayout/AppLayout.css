@@ -26,3 +26,9 @@
 	background-position: 50% 50%;
 	color: #fff;
 }
+
+.app-inner__col--last{
+	padding-top: 28px;
+	padding-left: 40px;	
+	padding-right: 40px;
+}

@@ -1,10 +1,11 @@
 import React from 'react'
 import './AppLayout.css'
-import appBg from '../../img/appBg.jpg'
-import City from '../City/City'
-import cityImg from '../../img/cityImg.jpg'
-import WeatherDescription from '../WeatherDescription/WeatherDescription'
-import WeatherIcon from '../WeatherIcon/WeatherIcon'
+import appBg from './img/appBg.jpg'
+import GeoPanel from '../GeoPanel/GeoPanel'
+import cityImg from './img/cityImg.jpg'
+import Description from '../Description/Description'
+import Icon from '../Icon/Icon'
+import Temperature from '../Temperature/Temperature'
 
 const AppLayout = ({weatherData}) => {
 
@@ -15,13 +16,20 @@ const AppLayout = ({weatherData}) => {
 
 				<div className="app-inner__col app-inner__col--first" style={ {backgroundImage: `url(${cityImg})`} } >
 
-					<WeatherIcon WeatherIconData = {weatherData.list[0].weather[0].icon} />
+					<Icon iconData = {weatherData.list[0].weather[0].icon} />
 
-					<WeatherDescription WeatherDescriptionData = {weatherData.list[0].weather[0].description}  />
+					<Description descriptionData = {weatherData.list[0].weather[0].main}  />
 
-					<City cityData = {weatherData.city} />
+					<GeoPanel geoPanelData = {weatherData.city} />
 
 				</div>
+
+				<div className="app-inner__col app-inner__col--last">
+				
+					<Temperature temperatureData = {weatherData.list[0].main.temp} />
+
+				</div>
+
 
 			</div>
 
