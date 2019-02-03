@@ -1,0 +1,6 @@
+.weather-icon{
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	font-size: 142px;
+}

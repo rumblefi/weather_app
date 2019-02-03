@@ -1,0 +1,7 @@
+.weather-description{
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	font-size: 36px;
+	background-color: rgba(46, 28, 37,0.89);
+}

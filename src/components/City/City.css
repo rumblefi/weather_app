@@ -1,0 +1,10 @@
+.city{
+	font-size: 22px;
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(119, 25, 33, 0.89);
+	padding-left: 15px;
+	padding-right: 15px;
+	text-align: center;
+}
