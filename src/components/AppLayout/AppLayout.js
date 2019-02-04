@@ -11,6 +11,16 @@ import Days from '../Days/Days'
 
 const AppLayout = ({weatherData}) => {
 
+	const {list} = weatherData
+	
+	const arr = list.map( (item) => ({
+		date: item.dt_txt.slice(0,10),
+		temp_max: item.main.temp_max,	
+		temp_min: item.main.temp_min,	
+	}))
+
+	console.log(arr)
+	
 	return (
 		<div className="app" style={ {backgroundImage: `url(${appBg})`} } >
 
