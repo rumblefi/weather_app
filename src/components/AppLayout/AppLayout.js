@@ -1,11 +1,13 @@
 import React from 'react'
 import './AppLayout.css'
 import appBg from './img/appBg.jpg'
+import graph from './img/graph.png'
 import GeoPanel from '../GeoPanel/GeoPanel'
 import cityImg from './img/cityImg.jpg'
 import Description from '../Description/Description'
 import Icon from '../Icon/Icon'
 import Temperature from '../Temperature/Temperature'
+import Days from '../Days/Days'
 
 const AppLayout = ({weatherData}) => {
 
@@ -27,6 +29,10 @@ const AppLayout = ({weatherData}) => {
 				<div className="app-inner__col app-inner__col--last">
 				
 					<Temperature temperatureData = {weatherData.list[0].main.temp} />
+
+					<img src={graph} alt=""/>
+
+					<Days daysData = {weatherData.list[0].main.temp} />
 
 				</div>
 

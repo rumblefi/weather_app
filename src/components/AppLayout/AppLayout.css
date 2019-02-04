@@ -11,8 +11,8 @@
 .app-inner{
 	display: grid;
 	grid-template-columns: repeat(2,1fr);
-	width: 581px;
-	height: 438px;
+	width: 700px;
+	height: 500px;
 	box-shadow: 0px 2px 21px 0px rgba(0, 0, 0, 0.44);
 	border-radius: 4px;
 	background-color: #ffffff;
@@ -28,7 +28,11 @@
 }
 
 .app-inner__col--last{
+	display: grid;
+	justify-items: center;
 	padding-top: 28px;
+	padding-bottom: 28px;
 	padding-left: 40px;	
 	padding-right: 40px;
+	color: #832D34;
 }
