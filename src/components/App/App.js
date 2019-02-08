@@ -217,6 +217,7 @@ export default class App extends Component{
 				this.fetchWeatherData(`${urlBase}&q=${latitude},${longitude}`)
 
 				this.fetchCityName(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBU05kbFWxihsarp2xTdE4j4OHqVmUNDaI&latlng=${latitude},${longitude}&language=ru`)
+				console.log(longitude)
 
 			})
 
