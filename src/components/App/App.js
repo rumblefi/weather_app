@@ -178,6 +178,7 @@ export default class App extends Component{
 				]
 			}
 		},
+		cityName: null
 	}
 
 	fetchWeatherData = (url) => {
@@ -195,9 +196,55 @@ export default class App extends Component{
 
 		fetch(url)
 			.then( (response) => response.json())
-			.then( (cityData) => {
+			.then( ( {status,results} ) => {
 
-				console.log(cityData)
+				if (status === 'OK') {
+					if (results[1]) {
+						var country = null,
+							countryCode = null,
+							city = null,
+							cityAlt = null;
+						var c, lc, component;
+						for (var r = 0, rl = results.length; r < rl; r += 1) {
+							var result = results[r];
+
+							if (!city && result.types[0] === 'locality') {
+								for (c = 0, lc = result.address_components.length; c < lc; c += 1) {
+									component = result.address_components[c];
+
+									if (component.types[0] === 'locality') {
+										city = component.long_name;
+										break;
+									}
+								}
+							} else if (!city && !cityAlt && result.types[0] === 'administrative_area_level_1') {
+								for (c = 0, lc = result.address_components.length; c < lc; c += 1) {
+									component = result.address_components[c];
+
+									if (component.types[0] === 'administrative_area_level_1') {
+										cityAlt = component.long_name;
+										break;
+									}
+								}
+							} else if (!country && result.types[0] === 'country') {
+								country = result.address_components[0].long_name;
+								countryCode = result.address_components[0].short_name;
+							}
+
+							if (city && country) {
+								break;
+							}
+						}
+
+						
+						this.setState({
+							cityName: city
+						})
+
+						// console.log("City: " + city + ", City2: " + cityAlt + ", Country: " + country + ", Country Code: " +
+						// 	countryCode);
+					}
+				}
 
 			})
 	}
@@ -212,6 +259,8 @@ export default class App extends Component{
 
 				this.fetchWeatherData(`${urlBase}&q=${latitude},${longitude}`)
 
+				this.fetchCityName(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBU05kbFWxihsarp2xTdE4j4OHqVmUNDaI`)
+				
 			})
 
 		} 
@@ -220,7 +269,9 @@ export default class App extends Component{
 
 	componentDidMount() {
 
-		// this.getLocation()
+		this.getLocation()
+
+		// this.fetchCityName(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${50.3930733},${24.242924199999997}&key=AIzaSyBU05kbFWxihsarp2xTdE4j4OHqVmUNDaI`)
 
 	}
 
@@ -230,7 +281,7 @@ export default class App extends Component{
 
 		return(
 			<div>
-				<AppLayout weatherData = {weatherData} icons = {icons} />
+				<AppLayout weatherData = {weatherData} icons = {icons} cityName = {this.state.cityName} />
 			</div>
 		)
 

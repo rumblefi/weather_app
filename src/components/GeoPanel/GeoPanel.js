@@ -2,10 +2,10 @@ import React from 'react'
 import './GeoPanel.css'
 import {getDayName,getMonthName,getDate} from '../../helpers'
 
-const GeoPanel = ({geoPanelData}) => {
+const GeoPanel = ({cityName}) => {
 
 	return(
-		<div className="geo-panel">{geoPanelData} - {getDayName( new Date() )}, {getMonthName( new Date() )} {getDate( new Date() )}</div>
+		<div className="geo-panel">{cityName} - {getDayName( new Date() )}, {getMonthName( new Date() )} {getDate( new Date() )}</div>
 	)	
 	
 }
