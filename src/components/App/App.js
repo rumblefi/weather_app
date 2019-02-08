@@ -11,7 +11,7 @@ const urlBase = 'https://api.apixu.com/v1/forecast.json?key=27577e64fe6e49389d72
 export default class App extends Component{
 	
 	state = {
-		weatherData: {},
+		weatherData: null,
 		cityName: null
 	}
 
@@ -92,8 +92,8 @@ export default class App extends Component{
 				const {coords: {latitude,longitude}} = position
 
 				this.fetchWeatherData(`${urlBase}&q=${latitude},${longitude}`)
-				// this.fetchCityName(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBU05kbFWxihsarp2xTdE4j4OHqVmUNDaI`)
-				
+
+				this.fetchCityName(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBU05kbFWxihsarp2xTdE4j4OHqVmUNDaI`)
 				
 			})
 			
@@ -111,11 +111,9 @@ export default class App extends Component{
 
 		const {weatherData,cityName} = this.state
 
-		console.log(weatherData)
-
 		return(
 			<div>
-				<AppLayout weatherData = {weatherData} icons = {icons}/>
+				{weatherData ? <AppLayout weatherData = {weatherData} icons = {icons} cityName = {cityName} /> : null }
 			</div>
 		)
 

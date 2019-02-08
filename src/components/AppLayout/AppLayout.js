@@ -9,7 +9,7 @@ import Icon from '../Icon/Icon'
 import Temperature from '../Temperature/Temperature'
 import Days from '../Days/Days'
 
-const AppLayout = ({weatherData,icons}) => {
+const AppLayout = ({weatherData,icons,cityName}) => {
 
 	return (
 		<div className="app" style={ {backgroundImage: `url(${appBg})`} } >
@@ -22,7 +22,7 @@ const AppLayout = ({weatherData,icons}) => {
 
 					<Description descriptionData = {weatherData.current.condition.text}  />
 
-					<GeoPanel geoPanelData = {weatherData.location.name}/>
+					<GeoPanel cityName = {cityName}/>
 
 				</div>
 
