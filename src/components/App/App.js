@@ -5,10 +5,6 @@ import './App.css'
 import AppLayout from '../AppLayout/AppLayout';
 import {icons} from '../../icons.js'
 
-
-
-// const urlBase = 'https://api.openweathermap.org/data/2.5/forecast?APPID=822240fd8ac6785298bfe78c207ed59c&units=metric'
-// const urlBase = 'https://api.apixu.com/v1/forecast.json?key=27577e64fe6e49389d7202224190702&q=50.3930733,24.242924199999997&days=4&lang=ru'
 const urlBase = 'https://api.apixu.com/v1/forecast.json?key=27577e64fe6e49389d7202224190702&days=4&lang=ru'
 
 
@@ -216,9 +212,6 @@ export default class App extends Component{
 
 				this.fetchWeatherData(`${urlBase}&q=${latitude},${longitude}`)
 
-				this.fetchCityName(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBU05kbFWxihsarp2xTdE4j4OHqVmUNDaI&latlng=${latitude},${longitude}&language=ru`)
-				console.log(longitude)
-
 			})
 
 		} 
@@ -227,7 +220,7 @@ export default class App extends Component{
 
 	componentDidMount() {
 
-		this.getLocation()
+		// this.getLocation()
 
 	}
 
