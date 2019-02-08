@@ -12,9 +12,14 @@
 }
 
 .days__icon{
+	font-size: 40px;
 	display: block;
 	margin-bottom: 5px;
+}
+
+.days__icon i{
 	font-size: 40px;
+	color: yell
 }
 
 .days__week-day{
@@ -36,4 +41,10 @@
 
 .days-list__item:last-child{
 	margin-bottom: 0;
+}
+
+.days__week-day{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }

@@ -9,18 +9,8 @@ import Icon from '../Icon/Icon'
 import Temperature from '../Temperature/Temperature'
 import Days from '../Days/Days'
 
-const AppLayout = ({weatherData}) => {
+const AppLayout = ({weatherData,icons}) => {
 
-	const {list} = weatherData
-	
-	const arr = list.map( (item) => ({
-		date: item.dt_txt.slice(0,10),
-		temp_max: item.main.temp_max,	
-		temp_min: item.main.temp_min,	
-	}))
-
-	console.log(arr)
-	
 	return (
 		<div className="app" style={ {backgroundImage: `url(${appBg})`} } >
 
@@ -28,21 +18,21 @@ const AppLayout = ({weatherData}) => {
 
 				<div className="app-inner__col app-inner__col--first" style={ {backgroundImage: `url(${cityImg})`} } >
 
-					<Icon iconData = {weatherData.list[0].weather[0].icon} />
+					<Icon iconData = {weatherData.current.condition.code} icons = {icons} />
 
-					<Description descriptionData = {weatherData.list[0].weather[0].main}  />
+					<Description descriptionData = {weatherData.current.condition.text}  />
 
-					<GeoPanel geoPanelData = {weatherData.city} />
+					<GeoPanel geoPanelData = {weatherData.location.name} />
 
 				</div>
 
 				<div className="app-inner__col app-inner__col--last">
 				
-					<Temperature temperatureData = {weatherData.list[0].main.temp} />
+					<Temperature temperatureData = {weatherData.current.temp_c} />
 
 					<img src={graph} alt=""/>
 
-					<Days daysData = {weatherData.list[0].main.temp} />
+					<Days daysData = {weatherData.forecast.forecastday.slice(1)} icons = {icons} />
 
 				</div>
 
