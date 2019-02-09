@@ -2,14 +2,16 @@ import React from 'react'
 import './AppLayout.css'
 import appBg from './img/appBg.jpg'
 import graph from './img/graph.png'
-import GeoPanel from '../GeoPanel/GeoPanel'
 import cityImg from './img/cityImg.jpg'
+import GeoPanel from '../GeoPanel/GeoPanel'
 import Description from '../Description/Description'
 import Icon from '../Icon/Icon'
 import Temperature from '../Temperature/Temperature'
 import Days from '../Days/Days'
 
 const AppLayout = ({weatherData,icons,cityName}) => {
+
+	const {current:currentWeather, forecast:forecastWeather} = weatherData
 
 	return (
 		<div className="app" style={ {backgroundImage: `url(${appBg})`} } >
@@ -18,9 +20,9 @@ const AppLayout = ({weatherData,icons,cityName}) => {
 
 				<div className="app-inner__col app-inner__col--first" style={ {backgroundImage: `url(${cityImg})`} } >
 
-					<Icon iconData = {weatherData.current.condition.code} icons = {icons} />
+					<Icon iconData = {currentWeather.condition.code} icons = {icons} />
 
-					<Description descriptionData = {weatherData.current.condition.text}  />
+					<Description descriptionData = {currentWeather.condition.text}  />
 
 					<GeoPanel cityName = {cityName}/>
 
@@ -28,11 +30,11 @@ const AppLayout = ({weatherData,icons,cityName}) => {
 
 				<div className="app-inner__col app-inner__col--last">
 				
-					<Temperature temperatureData = {weatherData.current.temp_c} />
+					<Temperature temperatureData = {currentWeather.temp_c} />
 
 					<img src={graph} alt=""/>
 
-					<Days daysData = {weatherData.forecast.forecastday.slice(1)} icons = {icons} />
+					<Days daysData = {forecastWeather.forecastday.slice(1)} icons = {icons} />
 
 				</div>
 

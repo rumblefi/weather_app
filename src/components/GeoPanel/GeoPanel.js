@@ -5,7 +5,7 @@ import {getDayName,getMonthName,getDate} from '../../helpers'
 const GeoPanel = ({cityName}) => {
 
 	return(
-		<div className="geo-panel">{cityName} - {getDayName( new Date() )}, {getDate( new Date() )} {getMonthName( new Date() )}</div>
+		<div className="geo-panel">{cityName} - {getDayName()}, {getDate()} {getMonthName()}</div>
 	)	
 	
 }

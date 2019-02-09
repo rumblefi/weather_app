@@ -3,7 +3,7 @@ import './Temperature.css'
 
 const WeatherTemperature = ({temperatureData}) => {
 
-	return <div className="temperature">{temperatureData.toFixed(1)} °C</div>
+	return <div className="temperature">{temperatureData} °C</div>
 
 }
 

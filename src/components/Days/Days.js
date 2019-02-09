@@ -11,7 +11,7 @@ const Days = ({daysData,icons}) => {
 			
 				<i className={`wi ${icons[condition.code]} days__icon`}></i>
 				
-				<div className="days__week-day">{getDayName( new Date(date) )}</div>
+				<div className="days__week-day">{getDayName()}</div>
 
 				<ul className="days-list">
 				
