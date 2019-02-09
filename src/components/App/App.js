@@ -1,15 +1,17 @@
 import React, {Component} from 'react'
+//импортируем константы для работы с API (это базовые URL различных API)
+import {weatherAPIBaseUrl,geocodeAPIBaseURL,geocodeAPIKey} from '../../contants'
+//css для работы с погодными иконками
 import '../../css/weather-icons.css'
+//сброс некоторых стандартных стилей
 import '../../css/main.css'
 import './App.css'
 import AppLayout from '../AppLayout/AppLayout';
+// обьект с кодами и классами для иконок. Например, API нам отдает код погоды 1000. Берем этот код и по нему достаем нужный нам класс для иконки
 import {icons} from '../../icons.js'
 import Loader from '../Loader/Loader'
 import Error from '../Error/Error'
-
-
-const apiUrlBase = 'https://api.apixu.com/v1/forecast.json?key=27577e64fe6e49389d7202224190702&days=4&lang=ru'
-
+import appBg from './img/appBg.jpg'
 
 export default class App extends Component{
 	
@@ -20,6 +22,7 @@ export default class App extends Component{
 		cityName: null
 	}
 
+	//берем дату из погодного Apixu API, ну тут все понятно
 	fetchWeatherData = (url) => {
 		fetch(url)
 			.then( (response) => {
@@ -40,6 +43,29 @@ export default class App extends Component{
 			}))
 	}
 
+	// получаем город проживания пользователя с помощью Google Geolocation API. Я использовал это API потому, что погодное API возвращает название города проживания только латиницей и не совсем точно 
+	fetchCityName = (url) => {
+		fetch(url)
+			.then( (response) => {
+				if(response.ok) {
+					return response.json()
+				}
+				else{
+					throw new Error('Something went wrong...')
+				}
+			})
+			.then( ( {results} ) => {
+
+				this.handleCityResponse(results)
+
+			})
+			.catch( (error) => this.setState({
+				error,
+				isLoading: false
+			}))
+	}
+
+	//обрабатываем запрос на получение названия города (Google Geocode API). API возвращает разные данные, а нам нужно быть уверенными, что мы точно получим город пользователя, а не, например, область его проживания/округ. Эту функцию, я конечно же, скопировал
 	handleCityResponse = (results) => {
 		if (results[1]) {
 			let country = null,
@@ -82,35 +108,27 @@ export default class App extends Component{
 			})
 		}
 	}
-
-	fetchCityName = (url) => {
-		fetch(url)
-			.then( (response) => {
-				if(response.ok) {
-					return response.json()
-				}
-				else{
-					throw new Error('Something went wrong...')
-				}
-			})
-			.then( ( {results} ) => {
-
-				this.handleCityResponse(results)
-
-			})
-			.catch( (error) => this.setState({
-				error,
-				isLoading: false
-			}))
-	}
 	
+	//для работы приложения нам нужно узнать координаты пользователя с помощью Geolocation API
+	getLocation = () => {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(this.handleSuccessLocation,this.handleErrorLocation)
+		} 
+		else{
+			alert('Геолокация не поддерживается Вашим браузером. Просьба обновить браузер до самой последней версии для просмотра приложения')
+		}
+	}
+
+	//для работы погодного API и API, что возвращает название города пользователя, нужны координаты пользователя (полученные с помощью Geolocation API)
 	handleSuccessLocation = (position) => {
 
 		const {coords: {latitude,longitude}} = position
 
-		this.fetchWeatherData(`${apiUrlBase}&q=${latitude},${longitude}`)
+		//получаем данные с погодного API
+		this.fetchWeatherData(`${weatherAPIBaseUrl}&q=${latitude},${longitude}`)
 
-		this.fetchCityName(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBU05kbFWxihsarp2xTdE4j4OHqVmUNDaI`)
+		//получаем данные о названии города пользователя 
+		this.fetchCityName(`${geocodeAPIBaseURL}=${latitude},${longitude}${geocodeAPIKey}`)
 
 	}
 
@@ -130,18 +148,11 @@ export default class App extends Component{
 			  break;
 		  }
 	}
-
-	getLocation = () => {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(this.handleSuccessLocation,this.handleErrorLocation)
-		} 
-		else{
-			alert('Геолокация не поддерживается Вашим браузером. Просьба обновить браузер до самой последней версии для просмотра приложения')
-		}
-	}
 	
+
 	componentDidMount() {
 
+		//это для загрузки лоадера
 		setTimeout(() => {
 
 			this.getLocation()
@@ -155,13 +166,14 @@ export default class App extends Component{
 		
 		const {isLoading,error,weatherData,cityName} = this.state
 
+		//если ошибка - просто выводим на экран ошибку
 		if(error) {
 			return <Error errorMessage = {error.message} />
 		}
 
 		else{
 			return(
-				<div className="app-wrapper" >
+				<div className="app" style={ {backgroundImage: `url(${appBg})`} }  >
 					{isLoading ? <Loader clazz = '' /> : <Loader clazz = 'is-loaded' /> }
 					{weatherData ? <AppLayout weatherData = {weatherData} icons = {icons} cityName = {cityName} /> : null}
 				</div>

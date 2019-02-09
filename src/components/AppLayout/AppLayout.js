@@ -1,6 +1,5 @@
 import React from 'react'
 import './AppLayout.css'
-import appBg from './img/appBg.jpg'
 import cityImg from './img/cityImg.jpg'
 import GeoPanel from '../GeoPanel/GeoPanel'
 import Description from '../Description/Description'
@@ -14,11 +13,12 @@ const AppLayout = ({weatherData,icons,cityName}) => {
 	const {current:currentWeather, forecast:forecastWeather} = weatherData
 
 	return (
-		<div className="app" style={ {backgroundImage: `url(${appBg})`} } >
 
-			<div className="app-inner">
+		<div className="app__container">
+		
+			<div className="app-content">
 
-				<div className="app-inner__col app-inner__col--first" style={ {backgroundImage: `url(${cityImg})`} } >
+				<div className="app-content__col app-content__col--first" style={ {backgroundImage: `url(${cityImg})`} } >
 
 					<Icon iconData = {currentWeather.condition.code} icons = {icons} />
 
@@ -28,8 +28,8 @@ const AppLayout = ({weatherData,icons,cityName}) => {
 
 				</div>
 
-				<div className="app-inner__col app-inner__col--last">
-				
+				<div className="app-content__col app-content__col--last">
+
 					<Temperature temperatureData = {currentWeather.temp_c} />
 
 					<Graph />
@@ -38,10 +38,10 @@ const AppLayout = ({weatherData,icons,cityName}) => {
 
 				</div>
 
-
 			</div>
 
-		</div>	
+		</div>		
+
 	)
 
 }

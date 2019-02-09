@@ -1,32 +1,20 @@
-.app{
-	display: grid;
-	height: 100vh;
-	align-items: center;
-	justify-content: center;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
+.app__container{
+	width: 100%;	
+	max-width: 800px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
-.app-inner{
+.app-content{
 	display: grid;
 	grid-template-columns: repeat(2,1fr);
-	width: 100%;
-	min-width: 800px;
-	max-width: 800px;
 	height: 500px;
 	box-shadow: 0px 2px 21px 0px rgba(0, 0, 0, 0.44);
 	border-radius: 4px;
 	background-color: #ffffff;
 }
 
-@media (max-width: 992px) {
-	.app-inner{
-		min-width: 100%;
-	}
-}
-
-.app-inner__col--first{
+.app-content__col--first{
 	display: grid;
 	grid-template-rows: 1fr 94px 104px;
 	background-size: cover;
@@ -35,7 +23,7 @@
 	color: #fff;
 }
 
-.app-inner__col--last{
+.app-content__col--last{
 	display: grid;
 	justify-items: center;
 	padding-top: 28px;
