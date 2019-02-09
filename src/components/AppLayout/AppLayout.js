@@ -1,13 +1,13 @@
 import React from 'react'
 import './AppLayout.css'
 import appBg from './img/appBg.jpg'
-import graph from './img/graph.png'
 import cityImg from './img/cityImg.jpg'
 import GeoPanel from '../GeoPanel/GeoPanel'
 import Description from '../Description/Description'
 import Icon from '../Icon/Icon'
 import Temperature from '../Temperature/Temperature'
 import Days from '../Days/Days'
+import Graph from '../Graph/Graph'
 
 const AppLayout = ({weatherData,icons,cityName}) => {
 
@@ -32,7 +32,7 @@ const AppLayout = ({weatherData,icons,cityName}) => {
 				
 					<Temperature temperatureData = {currentWeather.temp_c} />
 
-					<img src={graph} alt=""/>
+					<Graph />
 
 					<Days daysData = {forecastWeather.forecastday.slice(1)} icons = {icons} />
 
