@@ -105,9 +105,13 @@ export default class App extends Component{
 	}
 	
 	handleSuccessLocation = (position) => {
+
 		const {coords: {latitude,longitude}} = position
+
 		this.fetchWeatherData(`${apiUrlBase}&q=${latitude},${longitude}`)
+
 		this.fetchCityName(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBU05kbFWxihsarp2xTdE4j4OHqVmUNDaI`)
+
 	}
 
 	handleErrorLocation = (error) => {
@@ -131,7 +135,6 @@ export default class App extends Component{
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(this.handleSuccessLocation,this.handleErrorLocation)
 		} 
-
 		else{
 			alert('Геолокация не поддерживается Вашим браузером. Просьба обновить браузер до самой последней версии для просмотра приложения')
 		}
