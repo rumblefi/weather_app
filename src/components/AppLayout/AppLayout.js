@@ -8,41 +8,49 @@ import Temperature from '../Temperature/Temperature'
 import Days from '../Days/Days'
 import Graph from '../Graph/Graph'
 
-const AppLayout = ({weatherData,icons,cityName}) => {
+const AppLayout = ({weatherData, icons, cityName}) => {
 
-	const {current:currentWeather, forecast:forecastWeather} = weatherData
+    const {current: currentWeather, forecast: forecastWeather} = weatherData
 
-	return (
+    return (
 
-		<div className="app__container">
-		
-			<div className="app-content">
+        <div className="app__container">
 
-				<div className="app-content__col app-content__col--first" style={ {backgroundImage: `url(${cityImg})`} } >
+            <div className="app-content">
 
-					<Icon iconData = {currentWeather.condition.code} icons = {icons} />
+                <div
+                    className="app-content__col app-content__col--first"
+                    style={{
+                    backgroundImage: `url(${cityImg})`
+                }}>
 
-					<Description descriptionData = {currentWeather.condition.text}  />
+                    <Icon iconData={currentWeather.condition.code} icons={icons}/>
 
-					<GeoPanel cityName = {cityName}/>
+                    <Description descriptionData={currentWeather.condition.text}/>
 
-				</div>
+                    <GeoPanel cityName={cityName}/>
 
-				<div className="app-content__col app-content__col--last">
+                </div>
 
-					<Temperature temperatureData = {currentWeather.temp_c} />
+                <div className="app-content__col app-content__col--last">
 
-					<Graph />
+                    <Temperature temperatureData={currentWeather.temp_c}/>
 
-					<Days daysData = {forecastWeather.forecastday.slice(1)} icons = {icons} />
+                    <Graph/>
 
-				</div>
+                    <Days
+                        daysData={forecastWeather
+                        .forecastday
+                        .slice(1)}
+                        icons={icons}/>
 
-			</div>
+                </div>
 
-		</div>		
+            </div>
 
-	)
+        </div>
+
+    )
 
 }
 

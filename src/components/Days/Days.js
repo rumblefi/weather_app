@@ -2,27 +2,25 @@ import React from 'react'
 import './Days.css'
 import Day from '../Day/Day'
 
-const Days = ({daysData,icons}) => {
+const Days = ({daysData, icons}) => {
 
-	const daysItems = daysData.map( (dayData) => {
+    const daysItems = daysData.map((dayData) => {
 
-		console.log(dayData)
+        console.log(dayData)
 
-		return(
-			<Day key = {dayData.date}  dayData = {dayData}  icons = {icons} />
-		)
+        return (<Day key={dayData.date} dayData={dayData} icons={icons}/>)
 
-	}) 
+    })
 
-	return (
+    return (
 
-		<div className="days">
+        <div className="days">
 
-			{daysItems}
+            {daysItems}
 
-		</div>
+        </div>
 
-	)
+    )
 
 }
 
