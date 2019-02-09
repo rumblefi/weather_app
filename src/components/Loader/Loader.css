@@ -16,12 +16,17 @@
 	right: 0;
 	top: 0;
 	bottom: 0;
-	background-color:rgba(25,25,39,.6);
+	background-color:rgba(25,25,39,1);
 	z-index: 999999;
 	opacity: 1;
-	-webkit-transition: .3s;
-	-o-transition: .3s;
-	transition: .3s
+	-webkit-transition: .6s;
+	-o-transition: .6s;
+	transition: .6s
+}
+
+.loader.is-loaded{
+	opacity: 0;
+	pointer-events: none;
 }
 
 .sk-folding-cube {

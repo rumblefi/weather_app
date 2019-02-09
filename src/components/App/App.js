@@ -13,6 +13,8 @@ const urlBase = 'https://api.apixu.com/v1/forecast.json?key=27577e64fe6e49389d72
 export default class App extends Component{
 	
 	state = {
+		isLoading: true,
+		error: null,
 		weatherData: null,
 		cityName: null
 	}
@@ -20,12 +22,22 @@ export default class App extends Component{
 	fetchWeatherData = (url) => {
 
 		fetch(url)
-			.then( (response) => response.json())
-			.then( (weatherData) => {
-
-				this.setState({weatherData})
-
+			.then( (response) => {
+				if(response.ok) {
+					return response.json()
+				}
+				else{
+					throw new Error('Something went wrong...')
+				}
 			})
+			.then( (weatherData) => this.setState({
+				weatherData,
+				isLoading: false
+			}))
+			.catch( (error) => this.setState({
+				error,
+				isLoading: false
+			}))
 	}
 
 	fetchCityName = (url) => {
@@ -105,18 +117,26 @@ export default class App extends Component{
 	
 	componentDidMount() {
 
-		this.getLocation()
+		setTimeout(() => {
+
+			this.getLocation()
+			
+		}, 2000);
 
 	}
 
 	render() {
 		
-		const {weatherData,cityName} = this.state
-		
+		const {isLoading,error,weatherData,cityName} = this.state
+
+		if(error) {
+			return <div>Error: {error.message}</div>
+		}
+
 		return(
-			<div>
-				<Loader/>
-				{weatherData ? <AppLayout weatherData = {weatherData} icons = {icons} cityName = {cityName} /> : null }
+			<div className="app-wrapper" >
+				{isLoading ? <Loader clazz = '' /> : <Loader clazz = 'is-loaded' /> }
+				{weatherData ? <AppLayout weatherData = {weatherData} icons = {icons} cityName = {cityName} /> : null}
 			</div>
 		)
 
