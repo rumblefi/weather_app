@@ -4,6 +4,8 @@ import '../../css/main.css'
 import './App.css'
 import AppLayout from '../AppLayout/AppLayout';
 import {icons} from '../../icons.js'
+import Loader from '../Loader/Loader'
+
 
 const urlBase = 'https://api.apixu.com/v1/forecast.json?key=27577e64fe6e49389d7202224190702&days=4&lang=ru'
 
@@ -108,11 +110,12 @@ export default class App extends Component{
 	}
 
 	render() {
-
+		
 		const {weatherData,cityName} = this.state
-
+		
 		return(
 			<div>
+				<Loader/>
 				{weatherData ? <AppLayout weatherData = {weatherData} icons = {icons} cityName = {cityName} /> : null }
 			</div>
 		)
