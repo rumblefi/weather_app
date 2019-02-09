@@ -6,8 +6,6 @@ const Days = ({daysData, icons}) => {
 
     const daysItems = daysData.map((dayData) => {
 
-        console.log(dayData)
-
         return (<Day key={dayData.date} dayData={dayData} icons={icons}/>)
 
     })

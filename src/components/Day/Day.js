@@ -1,5 +1,5 @@
 import React from 'react'
-import {getDayName, getMonthName, getDate} from '../../helpers'
+import {getDayName} from '../../helpers'
 
 const Day = ({
     dayData: {
@@ -15,7 +15,7 @@ const Day = ({
 
             <i className={`wi ${icons[day.condition.code]} days__icon`}></i>
 
-            <div className="days__week-day">{getDayName(new Date(date))}</div>
+            <div className="days__week-day">{getDayName(date)}</div>
 
             <ul className="days-list">
 

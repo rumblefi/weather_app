@@ -1,17 +1,25 @@
-export const getDayName = (date = new Date()) => {
+export const getDayName = (dateStr) => {
+    dateStr = dateStr || new Date()
+        .toISOString()
+        .slice(0, 10);
+    const date = new Date(Date.parse(dateStr));
     const days = [
-        'Воскресенье',
-        'Понедельник',
-        'Вторник',
-        'Среда',
-        'Четверг',
-        'Пятница',
-        'Суббота'
-    ]
-    return days[date.getDay()]
+        "Воскресенье",
+        "Понедельник",
+        "Вторник",
+        "Среда",
+        "Четверг",
+        "Пятница",
+        "Суббота"
+    ];
+    return days[date.getDay()];
 }
 
-export const getMonthName = (date = new Date()) => {
+export const getMonthName = (dateStr) => {
+    dateStr = dateStr || new Date()
+        .toISOString()
+        .slice(0, 10);
+    const date = new Date(Date.parse(dateStr));
     const months = [
         'Января',
         'Февраля',
@@ -29,4 +37,10 @@ export const getMonthName = (date = new Date()) => {
     return months[date.getMonth()]
 }
 
-export const getDate = (date = new Date()) => date.getDate()
+export const getDate = (dateStr) => {
+    dateStr = dateStr || new Date()
+    .toISOString()
+    .slice(0, 10);
+    const date = new Date(Date.parse(dateStr));     
+    return date.getDate()
+}
